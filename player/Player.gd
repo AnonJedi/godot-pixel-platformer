@@ -11,6 +11,8 @@ export(int) var GRAVITY = 10
 
 var velocity = Vector2.ZERO
 
+onready var animation_sprite = $AnimatedSprite
+
 
 func _physics_process(_delta):
 	apply_gravity()
@@ -20,13 +22,22 @@ func _physics_process(_delta):
 
 	if input.x == 0:
 		apply_friction()
+		if velocity.x == 0:
+			animation_sprite.play("Idle")
 	else:
 		apply_acceleretion(input.x)
+
+		animation_sprite.flip_h = input.x > 0
+		if animation_sprite.animation == "Jump":
+			animation_sprite.animation = "Run"
+			animation_sprite.frame = 1
+		animation_sprite.play("Run")
 
 	if is_on_floor():
 		if Input.is_action_just_pressed("ui_up"):
 			velocity.y = -JUMP_HEIGHT
 	else:
+		animation_sprite.play("Jump")
 		if Input.is_action_just_released("ui_up") and velocity.y <= -MIN_JUMP_HEIGHT:
 			velocity.y = -MIN_JUMP_HEIGHT
 
