@@ -8,6 +8,7 @@ export(int) var MIN_JUMP_HEIGHT = 30
 export(int) var JUMP_ACCELERATION_POINT = 10
 export(int) var GRAVITY_ENHANCEMENT = 4
 export(int) var GRAVITY = 10
+export(int) var MAX_GRAVITY = 300
 
 var velocity = Vector2.ZERO
 
@@ -48,7 +49,7 @@ func _physics_process(_delta):
 
 
 func apply_gravity():
-	velocity.y += GRAVITY
+	velocity.y = min(velocity.y + GRAVITY, MAX_GRAVITY)
 
 
 func apply_friction():
