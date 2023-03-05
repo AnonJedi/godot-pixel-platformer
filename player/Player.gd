@@ -9,8 +9,10 @@ export(int) var JUMP_ACCELERATION_POINT = 10
 export(int) var GRAVITY_ENHANCEMENT = 4
 export(int) var GRAVITY = 10
 export(int) var MAX_GRAVITY = 300
+export(int) var HEALTH_CAPACITY = 3
 
 var velocity = Vector2.ZERO
+onready var hit_points = HEALTH_CAPACITY
 
 onready var animation_sprite = $AnimatedSprite
 
@@ -58,3 +60,7 @@ func apply_friction():
 
 func apply_acceleretion(direction: int):
 	velocity.x = move_toward(velocity.x, MAX_SPEED * direction, ACCELERATION)
+
+
+func handle_damage(damage: int) -> void:
+	hit_points = clamp(hit_points - damage, 0, HEALTH_CAPACITY)

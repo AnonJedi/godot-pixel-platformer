@@ -8,6 +8,22 @@
 
 config_version=4
 
+_global_script_classes=[ {
+"base": "Area2D",
+"class": "HitArea",
+"language": "GDScript",
+"path": "res://areas/hit-area/HitArea.gd"
+}, {
+"base": "Area2D",
+"class": "HurtArea",
+"language": "GDScript",
+"path": "res://areas/hurt-area/HurtArea.gd"
+} ]
+_global_script_class_icons={
+"HitArea": "",
+"HurtArea": ""
+}
+
 [application]
 
 config/name="pixel-platformer"
@@ -18,8 +34,8 @@ config/icon="res://icon.png"
 
 window/size/width=320
 window/size/height=180
-window/size/test_width=1920
-window/size/test_height=1080
+window/size/test_width=1280
+window/size/test_height=720
 window/stretch/mode="2d"
 window/stretch/aspect="keep"
 
@@ -30,6 +46,14 @@ window=false
 [gui]
 
 common/drop_mouse_on_gui_input_disabled=true
+
+[layer_names]
+
+2d_physics/layer_1="world"
+2d_physics/layer_2="player"
+2d_physics/layer_3="obstacles"
+2d_physics/layer_4="hit-area"
+2d_physics/layer_5="hurt-area"
 
 [physics]
 
