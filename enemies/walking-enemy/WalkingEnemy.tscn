@@ -1,0 +1,52 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://assets/characters_packed.png" type="Texture" id=1]
+[ext_resource path="res://areas/hit-area/HitArea.tscn" type="PackedScene" id=2]
+[ext_resource path="res://enemies/walking-enemy/WalkingEnemy.gd" type="Script" id=3]
+
+[sub_resource type="AtlasTexture" id=1]
+atlas = ExtResource( 1 )
+region = Rect2( 144, 24, 24, 24 )
+
+[sub_resource type="AtlasTexture" id=2]
+atlas = ExtResource( 1 )
+region = Rect2( 168, 24, 24, 24 )
+
+[sub_resource type="SpriteFrames" id=3]
+animations = [ {
+"frames": [ SubResource( 1 ), SubResource( 2 ) ],
+"loop": true,
+"name": "Walk",
+"speed": 5.0
+} ]
+
+[sub_resource type="RectangleShape2D" id=4]
+extents = Vector2( 5.5, 5 )
+
+[sub_resource type="RectangleShape2D" id=5]
+extents = Vector2( 6.5, 4.5 )
+
+[node name="WalkingEnemy" type="KinematicBody2D"]
+collision_mask = 0
+script = ExtResource( 3 )
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+position = Vector2( 0.5, -12 )
+frames = SubResource( 3 )
+animation = "Walk"
+playing = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 0, -5 )
+shape = SubResource( 4 )
+
+[node name="EdgeRayCast" type="RayCast2D" parent="."]
+position = Vector2( -5, 0 )
+enabled = true
+cast_to = Vector2( 0, 5 )
+
+[node name="HitArea" parent="." instance=ExtResource( 2 )]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitArea"]
+position = Vector2( 0, -5 )
+shape = SubResource( 5 )
