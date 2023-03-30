@@ -1,20 +1,17 @@
 extends KinematicBody2D
+class_name Player
 
-export(int) var MAX_SPEED = 80
-export(int) var ACCELERATION = 20
-export(int) var FRICTION = 20
-export(int) var JUMP_HEIGHT = 200
-export(int) var MIN_JUMP_HEIGHT = 30
-export(int) var JUMP_ACCELERATION_POINT = 10
-export(int) var GRAVITY_ENHANCEMENT = 4
-export(int) var GRAVITY = 10
-export(int) var MAX_GRAVITY = 300
+export(Resource) var movementConfig
 export(int) var HEALTH_CAPACITY = 3
 
 var velocity = Vector2.ZERO
 onready var hit_points = HEALTH_CAPACITY
 
 onready var animation_sprite = $AnimatedSprite
+
+
+func _ready():
+	movementConfig = movementConfig as PlayerMovementConfig
 
 
 func _physics_process(_delta):
@@ -38,28 +35,28 @@ func _physics_process(_delta):
 
 	if is_on_floor():
 		if Input.is_action_just_pressed("ui_up"):
-			velocity.y = -JUMP_HEIGHT
+			velocity.y = -movementConfig.JUMP_HEIGHT
 	else:
 		animation_sprite.play("Jump")
-		if Input.is_action_just_released("ui_up") and velocity.y <= -MIN_JUMP_HEIGHT:
-			velocity.y = -MIN_JUMP_HEIGHT
+		if Input.is_action_just_released("ui_up") and velocity.y <= -movementConfig.MIN_JUMP_HEIGHT:
+			velocity.y = -movementConfig.MIN_JUMP_HEIGHT
 
-		if velocity.y > JUMP_ACCELERATION_POINT:
-			velocity.y += GRAVITY_ENHANCEMENT
+		if velocity.y > movementConfig.JUMP_ACCELERATION_POINT:
+			velocity.y += movementConfig.GRAVITY_ENHANCEMENT
 
 	velocity = move_and_slide(velocity, Vector2.UP)
 
 
 func apply_gravity():
-	velocity.y = min(velocity.y + GRAVITY, MAX_GRAVITY)
+	velocity.y = min(velocity.y + movementConfig.GRAVITY, movementConfig.MAX_GRAVITY)
 
 
 func apply_friction():
-	velocity.x = move_toward(velocity.x, 0, FRICTION)
+	velocity.x = move_toward(velocity.x, 0, movementConfig.FRICTION)
 
 
 func apply_acceleretion(direction: int):
-	velocity.x = move_toward(velocity.x, MAX_SPEED * direction, ACCELERATION)
+	velocity.x = move_toward(velocity.x, movementConfig.MAX_SPEED * direction, movementConfig.ACCELERATION)
 
 
 func handle_damage(damage: int) -> void:

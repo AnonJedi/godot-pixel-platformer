@@ -18,10 +18,22 @@ _global_script_classes=[ {
 "class": "HurtArea",
 "language": "GDScript",
 "path": "res://areas/hurt-area/HurtArea.gd"
+}, {
+"base": "KinematicBody2D",
+"class": "Player",
+"language": "GDScript",
+"path": "res://player/Player.gd"
+}, {
+"base": "Resource",
+"class": "PlayerMovementConfig",
+"language": "GDScript",
+"path": "res://player/configs/PlayerMovementConfig.gd"
 } ]
 _global_script_class_icons={
 "HitArea": "",
-"HurtArea": ""
+"HurtArea": "",
+"Player": "",
+"PlayerMovementConfig": ""
 }
 
 [application]
@@ -54,6 +66,7 @@ common/drop_mouse_on_gui_input_disabled=true
 2d_physics/layer_3="obstacles"
 2d_physics/layer_4="hit-area"
 2d_physics/layer_5="hurt-area"
+2d_physics/layer_6="enemies"
 
 [physics]
 

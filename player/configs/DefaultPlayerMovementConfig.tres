@@ -1,0 +1,15 @@
+[gd_resource type="Resource" load_steps=2 format=2]
+
+[ext_resource path="res://player/configs/PlayerMovementConfig.gd" type="Script" id=1]
+
+[resource]
+script = ExtResource( 1 )
+MAX_SPEED = 80
+ACCELERATION = 20
+FRICTION = 20
+JUMP_HEIGHT = 200
+MIN_JUMP_HEIGHT = 30
+JUMP_ACCELERATION_POINT = 10
+GRAVITY_ENHANCEMENT = 4
+GRAVITY = 10
+MAX_GRAVITY = 300

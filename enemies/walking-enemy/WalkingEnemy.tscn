@@ -27,7 +27,7 @@ extents = Vector2( 5.5, 5 )
 extents = Vector2( 6.5, 4.5 )
 
 [node name="WalkingEnemy" type="KinematicBody2D"]
-collision_mask = 0
+collision_layer = 32
 script = ExtResource( 3 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
